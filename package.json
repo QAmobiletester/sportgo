@@ -1,0 +1,18 @@
+{
+  "name": "sportgo",
+  "version": "1.0.0",
+  "description": "sportgo project",
+  "main": "index.js",
+  "dependencies": {
+    "webdriverio": "^4.13.2"
+  },
+  "devDependencies": {
+    "wdio-jasmine-framework": "^0.3.5",
+    "wdio-mochawesome-reporter": "^1.3.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yaroslav",
+  "license": "ISC"
+}
