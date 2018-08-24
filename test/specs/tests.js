@@ -7,7 +7,7 @@ const checkElements = new Patterns.CheckElements();
 const mainMenu = new Patterns.MainMenu();
 const myAccountsPage = new Patterns.MyAccountsPage();
 const createAccountPage = new Patterns.CreateAccountPage();
-const accountInfo = new Patterns.AccountInfo();
+const accountInfoPage = new Patterns.accountInfoPagePage();
 
 describe('Sportgo project tests: ', function(){
 
@@ -27,6 +27,15 @@ describe('Sportgo project tests: ', function(){
         mainMenu.openMenu();
         mainMenu.openMyAccounts();
         myAccountsPage.createNewAccount();
-        createAccountPage.chooseAccountType();
+        createAccountPage.chooseHockeyTeam();
+        let communityName = 'Test name';
+        accountInfoPage.inputName('communityName');
+        accountInfoPage.inputBio('test bio');
+        accountInfoPage.inputGender();
+        accountInfoPage.inputLocation('New York');
+        accountInfoPage.inputSport();
+        accountInfoPage.inputAbility();
+        accountInfoPage.clickNextButton();
+        assert.equal(checkElements.elementText('app-account-name'), communityName);
     });
 })

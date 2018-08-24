@@ -38,12 +38,11 @@ class CreateAccountPage {
     chooseHockeyTeam() {
         browser.click('.bleed app-nav-card:nth-of-type(1) a')
     }
-    }
 }
 class FeedPage {
     
 }
-class AccountInfo {
+class AccountInfoPage {
     inputName(name) {
         browsser.setValue('[name="name"]', name);
     }
@@ -68,11 +67,17 @@ class AccountInfo {
     // inputAgeRange(ageRange) {
     //     browsser.setValue('[name="age_range_id"]', ageRange)
     // }
+    clickNextButton() {
+        browser.click('.right button ')
+    }
 }
 class CheckElements {
     isVisible(element) {
         browser.isVisible(element);
     }
+    elementText(element) {
+        browser.getText(element);
+    }
 }
-module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfo};
+module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage};
 
