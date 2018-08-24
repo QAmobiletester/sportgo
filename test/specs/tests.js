@@ -3,6 +3,11 @@ const Patterns = require('./Patterns');
 
 const goToUrl = new Patterns.GoToURL();
 const loginPage = new Patterns.LoginPage();
+const checkElements = new Patterns.CheckElements();
+const mainMenu = new Patterns.MainMenu();
+const myAccountsPage = new Patterns.MyAccountsPage();
+const createAccountPage = new Patterns.CreateAccountPage();
+const accountInfo = new Patterns.AccountInfo();
 
 describe('Sportgo project tests: ', function(){
 
@@ -13,7 +18,15 @@ describe('Sportgo project tests: ', function(){
         loginPage.clickNextButton();
     });
 
+    it('Check if user is successfully logged in', function() {
+        let mind = checkElements.isVisible('.post-create .post-input-wrapper');
+        assert.equal(mind, true);
+    });
+
     it('Create community account', function() {
-        
+        mainMenu.openMenu();
+        mainMenu.openMyAccounts();
+        myAccountsPage.createNewAccount();
+        createAccountPage.chooseAccountType();
     });
 })
