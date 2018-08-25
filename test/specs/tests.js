@@ -7,7 +7,9 @@ const checkElements = new Patterns.CheckElements();
 const mainMenu = new Patterns.MainMenu();
 const myAccountsPage = new Patterns.MyAccountsPage();
 const createAccountPage = new Patterns.CreateAccountPage();
-const accountInfoPage = new Patterns.accountInfoPagePage();
+const accountInfoPage = new Patterns.AccountInfoPage();
+const feedPage = new Patterns.FeedPage();
+const createPostPage = new Patterns.CreatePostPage();
 
 describe('Sportgo project tests: ', function(){
 
@@ -16,6 +18,7 @@ describe('Sportgo project tests: ', function(){
         loginPage.inputEmail('yaroslav.belinskiy@qa-testlab.com');
         loginPage.inputPassword('78qa22');
         loginPage.clickNextButton();
+        browser.waitForVisible('img[src$="menu.svg"]')
     });
 
     it('Check if user is successfully logged in', function() {
@@ -38,4 +41,12 @@ describe('Sportgo project tests: ', function(){
         accountInfoPage.clickNextButton();
         assert.equal(checkElements.elementText('app-account-name'), communityName);
     });
+
+    it('Create a new post', function() {
+        feedPage.openCreatePostPage();
+        let postText = 'Test text for post';
+        createPostPage.inputPostText(postText);
+        createPostPage.clickPostButton();
+        assert.equal(feedPage.checkNewCreatedPost(), postText)
+    })
 })

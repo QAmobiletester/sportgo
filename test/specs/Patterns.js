@@ -36,11 +36,24 @@ class CreateAccountPage {
     // chooseAccountType(){
     //     randomValue($$('.bleed a')).click()
     chooseHockeyTeam() {
-        browser.click('.bleed app-nav-card:nth-of-type(1) a')
+        browser.click('.bleed app-nav-card:nth-of-type(1) a');
     }
 }
 class FeedPage {
-    
+    openCreatePostPage() {
+        browser.click('.post-create .post-input-wrapper');
+    }
+    checkNewCreatedPost() {
+        return browser.getText('app-post:first-of-type .content-text');
+    }
+}
+class CreatePostPage {
+    inputPostText(text) {
+        browser.setValue('[name="description"]', text);
+    }
+    clickPostButton() {
+        browser.click('.right button');
+    }
 }
 class AccountInfoPage {
     inputName(name) {
@@ -73,11 +86,11 @@ class AccountInfoPage {
 }
 class CheckElements {
     isVisible(element) {
-        browser.isVisible(element);
+        return browser.isVisible(element);
     }
     elementText(element) {
-        browser.getText(element);
+        return browser.getText(element);
     }
 }
-module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage};
+module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage};
 
