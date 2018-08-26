@@ -46,6 +46,26 @@ class FeedPage {
     checkNewCreatedPost() {
         return browser.getText('app-post:first-of-type .content-text');
     }
+    getNumberOfLikes() {
+        return parseInt(browser.getText('app-post:first-of-type app-likeicon .count'));
+    }
+    likePost() {
+        browser.click('app-post:first-of-type app-likeicon button');
+    }
+    clickCommentButton() {
+        browser.click('app-post:first-of-type app-commenticon button');
+    }
+}
+class CommenstPage {
+    writeComment(text) {
+        browser.setValue('[name="comment"]', text);
+    }
+    sendComment() {
+        browser.click('.mat-input-wrapper mat-icon');
+    }
+    getFirstPostText() {
+        return browser.getText('app-comment-list-item:first-of-type p');
+    }
 }
 class CreatePostPage {
     inputPostText(text) {
@@ -92,5 +112,5 @@ class CheckElements {
         return browser.getText(element);
     }
 }
-module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage};
+module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage, CommenstPage};
 

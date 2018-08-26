@@ -10,8 +10,9 @@ const createAccountPage = new Patterns.CreateAccountPage();
 const accountInfoPage = new Patterns.AccountInfoPage();
 const feedPage = new Patterns.FeedPage();
 const createPostPage = new Patterns.CreatePostPage();
+const commenstPage = new Patterns.CommenstPage();
 
-describe('Sportgo project tests: ', function(){
+describe('Sportgo project tests: ', function() {
 
     beforeEach('Login into the network', function () {
         goToUrl.openURL('https://sportgo.dev.firestitch.com');
@@ -42,11 +43,27 @@ describe('Sportgo project tests: ', function(){
         assert.equal(checkElements.elementText('app-account-name'), communityName);
     });
 
-    it('Create a new post', function() {
+    it('Create a new text post', function() {
         feedPage.openCreatePostPage();
         let postText = 'Test text for post';
         createPostPage.inputPostText(postText);
         createPostPage.clickPostButton();
         assert.equal(feedPage.checkNewCreatedPost(), postText)
-    })
+    });
+
+    it('Like a first post', function() {
+        let initialNumberOfLikes = feedPage.getNumberOfLikes();
+        feedPage.likePost();
+        let newNumberOfLikes = feedPage.getNumberOfLikes();
+        assert.equal(initialNumberOfLikes, newNumberOfLikes);
+    });
+
+    it('Comment a first post', function() {
+        feedPage.clickCommentButton();
+        let commentText = 'text for comment';
+        commenstPage.writeComment(commentText);
+        commenstPage.sendComment();
+        let checkComment = commenstPage.getFirstPostText();
+        asser.equal(commentText, checkComment);
+    });
 })
