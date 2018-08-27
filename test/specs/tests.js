@@ -11,6 +11,7 @@ const accountInfoPage = new Patterns.AccountInfoPage();
 const feedPage = new Patterns.FeedPage();
 const createPostPage = new Patterns.CreatePostPage();
 const commenstPage = new Patterns.CommenstPage();
+const sharePage = new Patterns.SharePage();
 
 describe('Sportgo project tests: ', function() {
 
@@ -22,12 +23,12 @@ describe('Sportgo project tests: ', function() {
         browser.waitForVisible('img[src$="menu.svg"]')
     });
 
-    it('Check if user is successfully logged in', function() {
+    it('Check if user is successfully logged in ', function() {
         let mind = checkElements.isVisible('.post-create .post-input-wrapper');
         assert.equal(mind, true);
     });
 
-    it('Create community account', function() {
+    it('Create community account ', function() {
         mainMenu.openMenu();
         mainMenu.openMyAccounts();
         myAccountsPage.createNewAccount();
@@ -43,27 +44,48 @@ describe('Sportgo project tests: ', function() {
         assert.equal(checkElements.elementText('app-account-name'), communityName);
     });
 
-    it('Create a new text post', function() {
+    it('Create a new text post ', function() {
         feedPage.openCreatePostPage();
         let postText = 'Test text for post';
         createPostPage.inputPostText(postText);
         createPostPage.clickPostButton();
-        assert.equal(feedPage.checkNewCreatedPost(), postText)
+        assert.equal(feedPage.checkNewCreatedPost(), postText);
     });
 
-    it('Like a first post', function() {
+    it('Like a first post ', function() {
         let initialNumberOfLikes = feedPage.getNumberOfLikes();
         feedPage.likePost();
         let newNumberOfLikes = feedPage.getNumberOfLikes();
-        assert.equal(initialNumberOfLikes, newNumberOfLikes);
+        assert.equal((initialNumberOfLikes + 1), newNumberOfLikes);
     });
 
-    it('Comment a first post', function() {
+    it('Comment a first post ', function() {
         feedPage.clickCommentButton();
         let commentText = 'text for comment';
         commenstPage.writeComment(commentText);
         commenstPage.sendComment();
-        let checkComment = commenstPage.getFirstPostText();
+        let checkComment = commenstPage.getFirstCommentText();
         asser.equal(commentText, checkComment);
+        goToUrl.openURL('https://sportgo.dev.firestitch.com/feed');
+        let feedComment = feedPage.getFirstCommentText();
+        asser.equal(commentText, feedComment);
     });
+
+    it('Share post on my timeline ', function() {
+        feedPage.openCreatePostPage();
+        let postText = 'Test text for post';
+        createPostPage.inputPostText(postText);
+        createPostPage.clickPostButton();
+        feedPage.clickShareButton();
+        feedPage.clickMyTimeline();
+        let commentText = 'Text for sharing comment';
+        sharePage.inputCommentText(commentText);
+        sharePage.clickPostButton();
+        let checkCommentText = feedPage.getSharedComment();
+        assert.equal(commentText, checkCommentText);
+    });
+
+    it('Create event ', function() {
+        
+    })
 })

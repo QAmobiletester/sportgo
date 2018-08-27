@@ -55,6 +55,18 @@ class FeedPage {
     clickCommentButton() {
         browser.click('app-post:first-of-type app-commenticon button');
     }
+    getFirstCommentText() {
+        return browser.getText('app-comment-list-item:first-of-type p');
+    }
+    clickShareButton() {
+        browser.click('app-post:first-of-type app-share-menu button');
+    }
+    clickMyTimeline() {
+        browser.click('.mat-menu-content button:nth-of-type(2)');
+    }
+    getSharedComment() {
+        return browser.getText('.sub-content >app-post:nth-child(1) > app-card > app-card-content > p')
+    }
 }
 class CommenstPage {
     writeComment(text) {
@@ -63,12 +75,20 @@ class CommenstPage {
     sendComment() {
         browser.click('.mat-input-wrapper mat-icon');
     }
-    getFirstPostText() {
+    getFirstCommentText() {
         return browser.getText('app-comment-list-item:first-of-type p');
     }
 }
 class CreatePostPage {
     inputPostText(text) {
+        browser.setValue('[name="description"]', text);
+    }
+    clickPostButton() {
+        browser.click('.right button');
+    }
+}
+class SharePage {
+    inputCommentText(text) {
         browser.setValue('[name="description"]', text);
     }
     clickPostButton() {
@@ -112,5 +132,6 @@ class CheckElements {
         return browser.getText(element);
     }
 }
-module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage, CommenstPage};
+
+module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage, CommenstPage, SharePage};
 
