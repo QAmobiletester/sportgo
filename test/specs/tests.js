@@ -16,7 +16,7 @@ const sharePage = new Patterns.SharePage();
 describe('Sportgo project tests: ', function() {
 
     beforeEach('Login into the network', function () {
-        goToUrl.openURL('https://sportgo.dev.firestitch.com');
+        goToUrl.openURL('/');
         loginPage.inputEmail('yaroslav.belinskiy@qa-testlab.com');
         loginPage.inputPassword('78qa22');
         loginPage.clickNextButton();
@@ -28,13 +28,13 @@ describe('Sportgo project tests: ', function() {
         assert.equal(mind, true);
     });
 
-    it('Create community account ', function() {
+    fit('Create community account ', function() {
         mainMenu.openMenu();
         mainMenu.openMyAccounts();
         myAccountsPage.createNewAccount();
-        createAccountPage.chooseHockeyTeam();
-        let communityName = 'Test name';
-        accountInfoPage.inputName('communityName');
+        createAccountPage.chooseTeamType('Hockey Team');
+        const communityName = `testacc_${Math.floor(Math.random() * 1000)}`;
+        accountInfoPage.inputName(communityName);
         accountInfoPage.inputBio('test bio');
         accountInfoPage.inputGender();
         accountInfoPage.inputLocation('New York');
@@ -42,6 +42,7 @@ describe('Sportgo project tests: ', function() {
         accountInfoPage.inputAbility();
         accountInfoPage.clickNextButton();
         assert.equal(checkElements.elementText('app-account-name'), communityName);
+        // expect(checkElements.elementText('app-account-name')).toEqual(communityName)
     });
 
     it('Create a new text post ', function() {

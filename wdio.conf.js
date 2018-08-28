@@ -77,7 +77,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: 'https://sportgo.dev.firestitch.com',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 100000,
@@ -124,13 +124,17 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/reporters/dot.html
     reporters: ['mochawesome'],
-    
+    reporterOptions: {
+        mochawesome: {
+            outputDir: './testResults/mochawesome'
+        }
+    },
     //
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         //
         // Jasmine default timeout
-        defaultTimeoutInterval: 10000,
+        defaultTimeoutInterval: 10000 * 99,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time
@@ -170,8 +174,9 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.timeouts('implicit', 6000);
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

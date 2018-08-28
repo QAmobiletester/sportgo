@@ -29,14 +29,16 @@ class MainMenu {
 }
 class MyAccountsPage {
     createNewAccount() {
+        browser.pause(2009)
         browser.click('.right button span');
     }
 }
 class CreateAccountPage {
     // chooseAccountType(){
     //     randomValue($$('.bleed a')).click()
-    chooseHockeyTeam() {
-        browser.click('.bleed app-nav-card:nth-of-type(1) a');
+    chooseTeamType(accType) {
+        const l =  $$('.bleed app-nav-card a')
+        l.find (e => e.$('div h3').getText() == accType).click();
     }
 }
 class FeedPage {
@@ -97,25 +99,27 @@ class SharePage {
 }
 class AccountInfoPage {
     inputName(name) {
-        browsser.setValue('[name="name"]', name);
+        browser.setValue('[name="name"]', name);
     }
     inputBio(bio) {
-        browsser.setValue('[name="description"]', bio);
+        browser.setValue('[name="description"]', bio);
     }
     inputGender() {
         browser.click('[name="community_gender"]');
-        browser.click(randomValue($$('[role="option"]:not(:first-child)')));
+        // browser.click(randomValue($$('[role="option"]:not(:first-child)')));
+        randomValue($$('[role="option"]:not(:first-child)')).click();
     }
     inputLocation(location) {
-        browsser.setValue('[name="address_search"]', location);
+        browser.setValue('[name="address_search"]', location);
     }
     inputSport() {
         browser.click('[name="sport"]');
-        browser.click(randomValue($$('[role="option"]:not(:first-child)')));
+        const l = $$('[role="option"]:not(:first-child)')
+        randomValue(l).click();
     }
     inputAbility() {
         browser.click('[name="ability"]');
-        browser.click(randomValue($$('[role="option"]')));
+        randomValue($$('[role="option"]')).click();
     }
     // inputAgeRange(ageRange) {
     //     browsser.setValue('[name="age_range_id"]', ageRange)
@@ -125,11 +129,11 @@ class AccountInfoPage {
     }
 }
 class CheckElements {
-    isVisible(element) {
-        return browser.isVisible(element);
+    isVisible(elementLocator) {
+        return browser.isVisible(elementLocator);
     }
-    elementText(element) {
-        return browser.getText(element);
+    elementText(elementLocator) {
+        return browser.getText(elementLocator);
     }
 }
 

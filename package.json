@@ -8,10 +8,15 @@
   },
   "devDependencies": {
     "wdio-jasmine-framework": "^0.3.5",
-    "wdio-mochawesome-reporter": "^1.3.0"
+    "wdio-mochawesome-reporter": "^1.3.0",
+    "@types/jasmine": "^2.8.3",
+    "@types/webdriverio": "^4.10.3",
+    "mochawesome": "^3.0.1",
+    "mochawesome-report-generator": "^2.3.2",
+    "selenium-standalone": "^6.15.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "mochawesomeReport": "marge ./testResults/mochawesome/wdiomochawesome.json ./testResults/mochawesome/wdiomochawesome.json --reportTitle \"Is it not awesome?\" --reportDir ./testResults/mochawesome --reportFilename ./index.html"
   },
   "author": "yaroslav",
   "license": "ISC"
