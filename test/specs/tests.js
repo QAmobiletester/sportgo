@@ -28,7 +28,7 @@ describe('Sportgo project tests: ', function() {
         assert.equal(mind, true);
     });
 
-    fit('Create community account ', function() {
+    it('Create community account ', function() {
         mainMenu.openMenu();
         mainMenu.openMyAccounts();
         myAccountsPage.createNewAccount();
@@ -54,22 +54,22 @@ describe('Sportgo project tests: ', function() {
     });
 
     it('Like a first post ', function() {
+        browser.pause(4000)
         let initialNumberOfLikes = feedPage.getNumberOfLikes();
         feedPage.likePost();
-        let newNumberOfLikes = feedPage.getNumberOfLikes();
-        assert.equal((initialNumberOfLikes + 1), newNumberOfLikes);
+        assert.equal((initialNumberOfLikes + 1), feedPage.getNumberOfLikes());
     });
 
-    it('Comment a first post ', function() {
+    fit('Comment a first post ', function() {
         feedPage.clickCommentButton();
         let commentText = 'text for comment';
         commenstPage.writeComment(commentText);
         commenstPage.sendComment();
         let checkComment = commenstPage.getFirstCommentText();
-        asser.equal(commentText, checkComment);
+        assert.equal(checkComment, commentText);
         goToUrl.openURL('https://sportgo.dev.firestitch.com/feed');
         let feedComment = feedPage.getFirstCommentText();
-        asser.equal(commentText, feedComment);
+        assert.equal(commentText, feedComment);
     });
 
     it('Share post on my timeline ', function() {

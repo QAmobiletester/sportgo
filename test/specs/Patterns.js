@@ -46,10 +46,10 @@ class FeedPage {
         browser.click('.post-create .post-input-wrapper');
     }
     checkNewCreatedPost() {
-        return browser.getText('app-post:first-of-type .content-text');
+        return $('app-post:first-of-type .content-text').getText();
     }
     getNumberOfLikes() {
-        return parseInt(browser.getText('app-post:first-of-type app-likeicon .count'));
+        return parseInt($('app-post:first-of-type app-likeicon app-actionicon').getAttribute('ng-reflect-count'));
     }
     likePost() {
         browser.click('app-post:first-of-type app-likeicon button');
@@ -78,7 +78,8 @@ class CommenstPage {
         browser.click('.mat-input-wrapper mat-icon');
     }
     getFirstCommentText() {
-        return browser.getText('app-comment-list-item:first-of-type p');
+        // return $('app-comment-list-item:first-of-type p').getText();
+        return $('//app-comment-list-item//p[@ng-reflect-fs-linker]').getText();
     }
 }
 class CreatePostPage {
