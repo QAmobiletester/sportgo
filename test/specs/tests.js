@@ -65,19 +65,19 @@ describe('Sportgo project tests: ', function() {
         assert.equal((initialNumberOfLikes + 1), feedPage.getNumberOfLikes());
     });
 
-    // it('Comment a first post ', function() {
-    //     feedPage.clickCommentButton();
-    //     let commentText = 'text for comment';
-    //     commenstPage.writeComment(commentText);
-    //     commenstPage.sendComment();
-    //     let checkComment = commenstPage.getFirstCommentText();
-    //     assert.equal(checkComment, commentText);
-    //     browser.waitForVisible('img[src$="sportgo-home-icon.svg"]');
-    //     mainMenu.clickBackButton();
-    //     browser.waitForVisible('app-post:nth-of-type(1) app-comment-list-item p', 3000);
-    //     let feedComment = feedPage.getFirstCommentText();
-    //     assert.equal(commentText, feedComment);
-    // });
+    it('Comment a first post ', function() {
+        feedPage.clickCommentButton();
+        let commentText = 'text for comment';
+        commenstPage.writeComment(commentText);
+        commenstPage.sendComment();
+        let checkComment = commenstPage.getFirstCommentText();
+        assert.equal(checkComment, commentText);
+        browser.waitForVisible('img[src$="sportgo-home-icon.svg"]');
+        mainMenu.clickBackButton();
+        browser.waitForVisible('app-post:nth-of-type(1) app-comment-list-item p', 3000);
+        let feedComment = feedPage.getFirstCommentText();
+        assert.equal(commentText, feedComment);
+    });
 
     it('Share post on my timeline ', function() {
         feedPage.openCreatePostPage();
@@ -101,5 +101,5 @@ describe('Sportgo project tests: ', function() {
     //     const eventName = `testacc_${Math.floor(Math.random() * 1000)}`;
     //     createEventPage.inputName(eventName);
         
-    // })
+    // });
 });

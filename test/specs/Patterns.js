@@ -33,7 +33,7 @@ class MainMenu {
         browser.click('img[src$="sportgo-home-icon.svg"]');
     }
     clickBackButton() {
-        brwoser.click('.left a mat-icon')
+        browser.click('.left a mat-icon')
     }
 }
 class MyAccountsPage {
@@ -67,7 +67,7 @@ class FeedPage {
         browser.click('app-post:first-of-type app-commenticon button');
     }
     getFirstCommentText() {
-        return browser.getText('app-comment-list-item:first-of-type p');
+        return browser.getText('app-post:nth-of-type(1) app-comment-list-item p');
     }
     clickShareButton() {
         browser.click('app-post:first-of-type app-share-menu button');
@@ -87,7 +87,7 @@ class CommenstPage {
         browser.click('.mat-input-wrapper mat-icon');
     }
     getFirstCommentText() {
-        return $('app-post:nth-of-type(1) app-comment-list-item p').getText();
+        return browser.getText('app-comment-list-item:nth-of-type(1) p ');
     }
 }
 class CreatePostPage {
