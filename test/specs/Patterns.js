@@ -26,6 +26,15 @@ class MainMenu {
     openMyAccounts() {
         browser.click('.mat-list .mat-list-item:nth-of-type(2) span');
     }
+    openEvents() {
+        browser.click('.mat-list .mat-list-item:nth-of-type(4) span');
+    }
+    openHomePage() {
+        browser.click('img[src$="sportgo-home-icon.svg"]');
+    }
+    clickBackButton() {
+        brwoser.click('.left a mat-icon')
+    }
 }
 class MyAccountsPage {
     createNewAccount() {
@@ -78,8 +87,7 @@ class CommenstPage {
         browser.click('.mat-input-wrapper mat-icon');
     }
     getFirstCommentText() {
-        // return $('app-comment-list-item:first-of-type p').getText();
-        return $('//app-comment-list-item//p[@ng-reflect-fs-linker]').getText();
+        return $('app-post:nth-of-type(1) app-comment-list-item p').getText();
     }
 }
 class CreatePostPage {
@@ -129,6 +137,19 @@ class AccountInfoPage {
         browser.click('.right button ')
     }
 }
+class EventsPage {
+    clickThreeDotsButton() {
+        browser.click('.fs-list-actions button span')
+    }
+    clickCreateEvent() {
+        browser.click('#cdk-overlay-2 button:nth-of-type(1)')
+    }
+}
+class CreateEventPage {
+    inputName(name) {
+        browser.setValue('[name="name"]', name)
+    }
+}
 class CheckElements {
     isVisible(elementLocator) {
         return browser.isVisible(elementLocator);
@@ -138,5 +159,5 @@ class CheckElements {
     }
 }
 
-module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage, CommenstPage, SharePage};
+module.exports = {GoToURL, LoginPage, CheckElements, MainMenu, MyAccountsPage, CreateAccountPage, AccountInfoPage, FeedPage, CreatePostPage, CommenstPage, SharePage, EventsPage, CreateEventPage};
 

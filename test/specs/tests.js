@@ -12,11 +12,14 @@ const feedPage = new Patterns.FeedPage();
 const createPostPage = new Patterns.CreatePostPage();
 const commenstPage = new Patterns.CommenstPage();
 const sharePage = new Patterns.SharePage();
+const eventsPage = new Patterns.EventsPage();
+const createEventPage = new Patterns.CreateEventPage();
 
 describe('Sportgo project tests: ', function() {
 
-    beforeEach('Login into the network', function () {
+    beforeAll('Login into the network', function () {
         goToUrl.openURL('/');
+        browser.waitForVisible('#mat-input-0', 5000);
         loginPage.inputEmail('yaroslav.belinskiy@qa-testlab.com');
         loginPage.inputPassword('78qa22');
         loginPage.clickNextButton();
@@ -55,22 +58,26 @@ describe('Sportgo project tests: ', function() {
 
     it('Like a first post ', function() {
         browser.pause(4000)
+        browser.waitForVisible('app-post:first-of-type app-likeicon app-actionicon');
         let initialNumberOfLikes = feedPage.getNumberOfLikes();
         feedPage.likePost();
+        browser.waitForVisible('app-post:first-of-type app-likeicon app-actionicon');
         assert.equal((initialNumberOfLikes + 1), feedPage.getNumberOfLikes());
     });
 
-    fit('Comment a first post ', function() {
-        feedPage.clickCommentButton();
-        let commentText = 'text for comment';
-        commenstPage.writeComment(commentText);
-        commenstPage.sendComment();
-        let checkComment = commenstPage.getFirstCommentText();
-        assert.equal(checkComment, commentText);
-        goToUrl.openURL('https://sportgo.dev.firestitch.com/feed');
-        let feedComment = feedPage.getFirstCommentText();
-        assert.equal(commentText, feedComment);
-    });
+    // it('Comment a first post ', function() {
+    //     feedPage.clickCommentButton();
+    //     let commentText = 'text for comment';
+    //     commenstPage.writeComment(commentText);
+    //     commenstPage.sendComment();
+    //     let checkComment = commenstPage.getFirstCommentText();
+    //     assert.equal(checkComment, commentText);
+    //     browser.waitForVisible('img[src$="sportgo-home-icon.svg"]');
+    //     mainMenu.clickBackButton();
+    //     browser.waitForVisible('app-post:nth-of-type(1) app-comment-list-item p', 3000);
+    //     let feedComment = feedPage.getFirstCommentText();
+    //     assert.equal(commentText, feedComment);
+    // });
 
     it('Share post on my timeline ', function() {
         feedPage.openCreatePostPage();
@@ -86,7 +93,13 @@ describe('Sportgo project tests: ', function() {
         assert.equal(commentText, checkCommentText);
     });
 
-    it('Create event ', function() {
+    // it('Create event ', function() {
+    //     mainMenu.openMenu();   
+    //     mainMenu.openEvents();
+    //     eventsPage.clickThreeDotsButton();
+    //     eventsPage.clickCreateEvent();
+    //     const eventName = `testacc_${Math.floor(Math.random() * 1000)}`;
+    //     createEventPage.inputName(eventName);
         
-    })
-})
+    // })
+});
